@@ -1446,9 +1446,9 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                 <p class="p5-about-text">A VTECH Rio Preto é especializada em soluções completas de segurança eletrônica para residências, empresas e condomínios. </p>
                 <p class="p5-about-text">Desenvolvemos projetos personalizados que integram monitoramento, câmeras, alarmes e controle de acesso, oferecendo proteção eficiente, confiável e inteligente. </p>
                 <div class="p5-social-icons">
-                    <!-- REMOVIDO LINKEDIN E YOUTUBE, MANTIDO APENAS INSTAGRAM E FACEBOOK -->
-                    <a href="#" class="p5-social-link"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="p5-social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <!-- LINKS ATUALIZADOS PARA INSTAGRAM E FACEBOOK -->
+                    <a href="https://www.facebook.com/vtechriopreto/?locale=pt_BR" target="_blank" class="p5-social-link"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/vtechriopreto/" target="_blank" class="p5-social-link"><i class="fa-brands fa-instagram"></i></a>
                 </div>
             </div>
             
@@ -1487,8 +1487,9 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
             <div class="p5-footer-section p5-footer-col-offset">
                 <h4>Informativos Técnicos</h4>
                 <p class="p5-newsletter-desc">Assine para receber relatórios de riscos analíticos e atualizações tecnológicas de mercado.</p>
-                <form class="p5-newsletter-form" action="#" method="POST">
-                    <input type="email" class="p5-newsletter-input" placeholder="Seu e-mail profissional" required>
+                <!-- ADICIONADO ID AO FORMULÁRIO DA NEWSLETTER -->
+                <form class="p5-newsletter-form" id="newsletterForm">
+                    <input type="email" id="newsletterEmail" class="p5-newsletter-input" placeholder="Seu e-mail profissional" required>
                     <button type="submit" class="p5-btn-newsletter"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
@@ -1531,7 +1532,7 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
             });
         }
 
-        // ===== LÓGICA DO FORMULÁRIO PARA WHATSAPP =====
+        // ===== LÓGICA DO FORMULÁRIO DE CONTATO PARA WHATSAPP =====
         const form = document.getElementById('whatsappForm');
         if(form) {
             form.addEventListener('submit', function(e) {
@@ -1552,6 +1553,23 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                                        `*Mensagem:* ${msg}`;
                 
                 const url = `https://wa.me/5517981397628?text=${encodeURIComponent(textoFormatado)}`;
+                
+                window.open(url, '_blank');
+            });
+        }
+
+        // ===== LÓGICA DA NEWSLETTER PARA WHATSAPP =====
+        const newsletterForm = document.getElementById('newsletterForm');
+        if(newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const emailNews = document.getElementById('newsletterEmail').value;
+                
+                // Formatação da mensagem da Newsletter
+                const textoNewsletter = `Olá, gostaria de assinar a newsletter da VTECH.\n\n*Meu e-mail:* ${emailNews}`;
+                
+                const url = `https://wa.me/5517981397628?text=${encodeURIComponent(textoNewsletter)}`;
                 
                 window.open(url, '_blank');
             });
