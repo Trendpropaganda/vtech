@@ -251,8 +251,34 @@
             display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 500;
         }
         .p1-top-bar-left span { margin-right: 15px; display: inline-block; }
-        .p1-top-bar-right a { color: #ffffff; margin-left: 15px; text-decoration: none; font-size: 12px; transition: opacity 0.3s; }
-        .p1-top-bar-right a:hover { opacity: 0.8; }
+        
+        /* Estilo dos Botões Sociais no Topo */
+        .social-header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-header-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-header-btn:hover {
+            background-color: #ffffff;
+            color: #0056e2;
+            transform: translateY(-1px);
+        }
+        .social-header-btn i {
+            font-size: 14px;
+        }
 
         .p1-main-header {
             background-color: #ffffff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
@@ -426,7 +452,29 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), var(--bg-image);
             background-size: cover; background-position: center; opacity: 0; transition: opacity 0.4s ease-in-out; z-index: -1;
         }
-        .p2-solution-icon-wrapper { width: auto; height: auto; font-size: 2.5rem; color: #0056b3; margin-bottom: 20px; transition: color 0.3s ease; }
+        
+        /* AJUSTE PARA IMAGENS DE ÍCONE */
+        .p2-solution-icon-wrapper { 
+            width: auto; 
+            height: auto; 
+            color: #0056b3; 
+            margin-bottom: 20px; 
+            transition: all 0.3s ease; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* Regra específica para as imagens dentro do wrapper */
+        .p2-solution-icon-wrapper img {
+            width: 60px; /* Tamanho equivalente ao font-size anterior */
+            height: 60px;
+            object-fit: contain;
+            /* Filtro para deixar azul caso a imagem seja preta/branca. Remova se sua imagem já for colorida */
+            filter: invert(37%) sepia(98%) saturate(1240%) hue-rotate(190deg) brightness(95%) contrast(95%);
+            transition: filter 0.3s ease;
+        }
+
         .p2-solution-box-title { font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0 0 10px 0; transition: color 0.3s ease; }
         .p2-solution-box-text { font-size: 0.9rem; color: #64748b; line-height: 1.6; margin: 0 0 15px 0; transition: color 0.3s ease; }
         .p2-solution-btn {
@@ -437,7 +485,13 @@
         }
         .p2-solution-box:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25); border-color: #0056b3; }
         .p2-solution-box:hover::before { opacity: 1; }
-        .p2-solution-box:hover .p2-solution-icon-wrapper, .p2-solution-box:hover .p2-solution-box-title, .p2-solution-box:hover .p2-solution-box-text { color: #ffffff; }
+        .p2-solution-box:hover .p2-solution-box-title, .p2-solution-box:hover .p2-solution-box-text { color: #ffffff; }
+        
+        /* No hover, o ícone fica branco */
+        .p2-solution-box:hover .p2-solution-icon-wrapper img {
+            filter: brightness(0) invert(1);
+        }
+        
         .p2-solution-box:hover .p2-solution-btn { opacity: 1; transform: scale(1); }
 
         /* ==========================================
@@ -622,7 +676,20 @@
         
         .p5-main-footer { padding-top: 60px; display: grid; grid-template-columns: 1.3fr 1fr 1fr 1.1fr; gap: 30px; text-align: left; margin-bottom: 40px; }
         .p5-footer-section h4 { font-size: 14px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; color: #ffffff; }
-        .p5-about-text { color: var(--p5-text-muted); font-size: 13px; line-height: 1.6; margin: 20px 0; }
+        
+        /* AJUSTE DO TEXTO DO FOOTER PARA CABER ATÉ A LINHA VERMELHA */
+        .p5-about-text { 
+            color: var(--p5-text-muted); 
+            font-size: 12px; /* Reduzi um pouco a fonte */
+            line-height: 1.5; 
+            margin: 12px 0; /* Reduzi o espaçamento vertical */
+        }
+        
+        /* NOVO: CLASSE PARA ALINHAMENTO DAS COLUNAS CENTRAIS E DIREITA */
+        .p5-footer-col-offset {
+            margin-top: 45px; /* Empurra o conteúdo para alinhar com o final do texto da col 1 */
+        }
+
         .p5-social-icons { display: flex; gap: 10px; }
         .p5-social-link {
             width: 32px; height: 32px; background-color: rgba(255, 255, 255, 0.05); border-radius: 4px;
@@ -660,13 +727,17 @@
             .p1-cards-container { grid-template-columns: repeat(2, 1fr); }
             .p3-team-grid { grid-template-columns: repeat(2, 1fr); }
             .p5-main-footer { grid-template-columns: 1fr 1fr; }
+            /* Remove o offset em telas menores pois o layout muda */
+            .p5-footer-col-offset { margin-top: 0; }
         }
 
         @media (max-width: 768px) {
             /* Top Bar & Header */
             .p1-top-bar { flex-direction: column; gap: 8px; text-align: center; padding: 8px 5%; }
             .p1-top-bar-left span { margin-right: 10px; font-size: 11px; }
-            .p1-top-bar-right a { margin: 0 5px; font-size: 11px; }
+            
+            /* Ajuste botões sociais mobile */
+            .social-header-buttons { margin-top: 5px; }
             
             .p1-main-header { flex-direction: row; justify-content: space-between; padding: 15px 5%; }
             .p1-logo-container { margin-right: auto; }
@@ -774,9 +845,14 @@
                 <span><i class="fa-solid fa-phone" style="margin-right:6px; color:#ffffff;"></i> +55 (17) 98139-7628</span>
                 <span><i class="fa-solid fa-envelope" style="margin-right:6px; color:#ffffff;"></i> contato@vtechriopreto.com.br</span>
             </div>
-            <div class="p1-top-bar-right">
-                <a href="#">Suporte</a>
-                <a href="#">Portal Parceiro</a>
+            <!-- ALTERAÇÃO AQUI: BOTÕES COM TEXTO E ÍCONE -->
+            <div class="p1-top-bar-right social-header-buttons">
+                <a href="https://www.instagram.com/vtechriopreto/" target="_blank" class="social-header-btn">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.facebook.com/vtechriopreto/?locale=pt_BR" target="_blank" class="social-header-btn">
+                    <i class="fa-brands fa-facebook-f"></i> Facebook
+                </a>
             </div>
         </div>
 
@@ -954,42 +1030,73 @@
             <h2 class="p2-solutions-main-title">Nossas Soluções em Segurança</h2>
         </div>
         <div class="p2-solutions-grid">
+            
+            <!-- Item 1: Monitoramento -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-camera"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i1-Photoroom.png" alt="Ícone Monitoramento">
+                </div>
                 <h3 class="p2-solution-box-title">Monitoramento</h3>
                 <p class="p2-solution-box-text">Central especializada acompanhando seus sistemas 24 horas por dia.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Sistemas de CFTV HD." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
+            <!-- Item 2: Manutenção -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-fingerprint"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i2-Photoroom.png" alt="Ícone Manutenção">
+                </div>
                 <h3 class="p2-solution-box-title">Manutenção</h3>
                 <p class="p2-solution-box-text">Suporte técnico preventivo e corretivo para máxima performance dos equipamentos.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Controle de Acesso." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
+            <!-- Item 3: Portaria Remota -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-bell-slash"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i3-Photoroom.png" alt="Ícone Portaria">
+                </div>
                 <h3 class="p2-solution-box-title">Portaria Remota</h3>
                 <p class="p2-solution-box-text">Controle inteligente de visitantes e acessos à distância.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Alarmes Inteligentes." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
+            <!-- Item 4: CFTV -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i4-Photoroom.png" alt="Ícone CFTV">
+                </div>
                 <h3 class="p2-solution-box-title">CFTV</h3>
                 <p class="p2-solution-box-text">Monitoramento por câmeras de alta definição com acesso remoto.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Cercas Virtuais com IA." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
+            <!-- Item 5: Alarmes -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-server"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i5-Photoroom.png" alt="Ícone Alarme">
+                </div>
                 <h3 class="p2-solution-box-title">Alarmes</h3>
                 <p class="p2-solution-box-text">Sensores inteligentes e alertas imediatos contra invasões.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Servidores Edge." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
+            <!-- Item 6: Controle de Acesso -->
             <div class="p2-solution-box" style="--bg-image: url('ChatGPT\ Image\ 31\ de\ mai.\ de\ 2026\,\ 19_24_46.png');">
-                <div class="p2-solution-icon-wrapper"><i class="fa-solid fa-satellite-dish"></i></div>
+                <div class="p2-solution-icon-wrapper">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM -->
+                    <img src="i6-Photoroom (1).png" alt="Ícone Controle de Acesso">
+                </div>
                 <h3 class="p2-solution-box-title">Controle de Acesso</h3>
                 <p class="p2-solution-box-text">Gestão segura de entradas e saídas por biometria, tags e aplicativos.</p>
                 <a href="https://wa.me/5517981397628?text=Tenho interesse em Conectividade Redundante." target="_blank" class="p2-solution-btn"><i class="fa-solid fa-chevron-right"></i></a>
             </div>
+
         </div>
     </section>
 
@@ -1208,7 +1315,7 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                         </p>
                         <h4>Central de Atendimento 24/7</h4>
                         <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Monitoramento contínuo dos sistemas</li>
+                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Monitoramento contínuo dos sistemas</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Resposta rápida a ocorrências</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Tecnologia integrada de segurança</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Equipe especializada para suporte técnico</li>
@@ -1233,7 +1340,7 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                         <h4>Central de Atendimento 24/7</h4>
                         <ul class="features-list">
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Monitoramento contínuo dos sistemas</li>
-                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Resposta rápida a ocorrências</li>
+                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Resposta rápida a ocorrências</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Tecnologia integrada de segurança</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Equipe especializada para suporte técnico</li>
                         </ul>
@@ -1280,7 +1387,7 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                         </p>
                         <h4>Central de Atendimento 24/7</h4>
                         <ul class="features-list">
-                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Monitoramento contínuo dos sistemas</li>
+                            <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Monitoramento contínuo dos sistemas</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> ⁠Resposta rápida a ocorrências</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Tecnologia integrada de segurança</li>
                             <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4"/></svg> Equipe especializada para suporte técnico</li>
@@ -1339,13 +1446,14 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                 <p class="p5-about-text">A VTECH Rio Preto é especializada em soluções completas de segurança eletrônica para residências, empresas e condomínios. </p>
                 <p class="p5-about-text">Desenvolvemos projetos personalizados que integram monitoramento, câmeras, alarmes e controle de acesso, oferecendo proteção eficiente, confiável e inteligente. </p>
                 <div class="p5-social-icons">
-                    <a href="#" class="p5-social-link"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <!-- REMOVIDO LINKEDIN E YOUTUBE, MANTIDO APENAS INSTAGRAM E FACEBOOK -->
                     <a href="#" class="p5-social-link"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="p5-social-link"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="p5-social-link"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="p5-footer-section">
+            
+            <!-- ADICIONADA CLASSE p5-footer-col-offset PARA ALINHAMENTO -->
+            <div class="p5-footer-section p5-footer-col-offset">
                 <h4>Nossas Soluções</h4>
                 <ul class="p5-footer-menu">
                     <li><a href="#">Sistemas de CFTV HD</a></li>
@@ -1355,7 +1463,9 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                     <li><a href="#">Servidores Edge Inteligentes</a></li>
                 </ul>
             </div>
-            <div class="p5-footer-section">
+            
+            <!-- ADICIONADA CLASSE p5-footer-col-offset PARA ALINHAMENTO -->
+            <div class="p5-footer-section p5-footer-col-offset">
                 <h4>Sede Corporativa</h4>
                 <ul class="p5-contact-info-list">
                     <li>
@@ -1372,7 +1482,9 @@ Tecnologia, inteligência e segurança trabalhando juntas para proteger o que re
                     </li>
                 </ul>
             </div>
-            <div class="p5-footer-section">
+            
+            <!-- ADICIONADA CLASSE p5-footer-col-offset PARA ALINHAMENTO -->
+            <div class="p5-footer-section p5-footer-col-offset">
                 <h4>Informativos Técnicos</h4>
                 <p class="p5-newsletter-desc">Assine para receber relatórios de riscos analíticos e atualizações tecnológicas de mercado.</p>
                 <form class="p5-newsletter-form" action="#" method="POST">
